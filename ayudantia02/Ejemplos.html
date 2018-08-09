@@ -1,59 +1,63 @@
-
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Ayudantia 2</title>
+        <meta charset='utf-8'>
+        <title>Ejemplo Javascript + HTML</title>
+        <link href="style.css" rel="stylesheet" type="text/css">
+        <script src="ayudantia2.js"></script>
     </head>
+
+    <body>
+        <div>
+            <h1>
+                Ejemplo 1: HTML + console.log()
+            </h1>
+            <p>
+                En este ejemplo tendremos 3 botones que al momento de hacer click, impriman en consola algún texto en específico.
+            </p>
+            <input type="button" id="boton1" value="Botoncito 1">
+            <input type="button" id="boton2" value="Botoncito 2">
+            <input type="button" id="boton3" value="Botoncito 3">
+        </div>
     
-<script src="ayudantia2.js"></script>
-
-<div>
-    <h1>
-        Ejemplo 1: HTML + console.log()
-    </h1>
-    <p>
-        En este ejemplo tendremos 3 botones que al momento de hacer click, impriman en consola algún texto en específico.
-    </p>
-    <input type="button" id="boton1" value="Botoncito 1">
-    <input type="button" id="boton2" value="Botoncito 2">
-    <input type="button" id="boton3" value="Botoncito 3">
-</div>
-
-
-<div>
-    <h1>
-        Ejemplo 2: Esconder y mostrar texto
-    </h1>
-    <p>
-        En este ejemplo .
-    </p>
-    <input type="button" id="botonHide" value="Hide">
-    <input type="button" id="botonShow" value="Show">
-
-    <div id="ejemplo2">
-        <p>
-            Este texto se puede esconder
-        </p>
-
-    </div>
-</div>
-
-<div>
-    <h1>
-        Ejemplo 3: Editar elemento html
-    </h1>
-    <label for="texto">Ingrese un texto</label>
-    <input type="text" name="texto" id="textoEjemplo3">
     
-    <input type="button" id="botonEditar" value="Editar HTML">
-
-    <div>
-        <p>
-            El siguiente texto se va a editar: 
-        </p>
-        <div id="ejemplo3">Este texto se editara</div>
-
-    </div>
-</div>
-
+        <div>
+            <h1>
+                Ejemplo 2: Esconder y mostrar texto
+            </h1>
+            <p>
+                En este ejemplo se utiliza javascript para esconder o visualizar un texto de forma dinamica.
+            </p>
+            <input type="button" id="botonHide" value="Hide">
+            <input type="button" id="botonShow" value="Show">
+        
+            <div id="ejemplo2">
+                <p>
+                    Este texto se puede esconder
+                </p>
+        
+            </div>
+        </div>
+        
+        <div>
+            <h1>
+                Ejemplo 3: Editar elemento html
+            </h1>
+            <p>
+                En este ejemplo se utiliza javascript para editar el contenido de un div de forma dinamica.
+            </p>
+            <label for="texto">Ingrese un texto</label>
+            <input type="text" name="texto" id="textoEjemplo3">
+            
+            <input type="button" id="botonEditar" value="Editar HTML">
+        
+            <div>
+                <p>
+                    El siguiente texto se va a editar: 
+                </p>
+                <div id="ejemplo3">Este texto se editara</div>
+        
+            </div>
+        </div>
+    </body>
 </html>

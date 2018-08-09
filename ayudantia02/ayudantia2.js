@@ -1,4 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){ 
+    // Ejemplo 1
     const boton1 = document.getElementById("boton1");
     boton1.onclick = function(d) {
         console.log("Hice click en " + boton1.value)
@@ -14,6 +15,8 @@ document.addEventListener('DOMContentLoaded', function(){
         console.log("Hice click en " + boton3.value)
     }
 
+
+    // Ejemplo 2
     const botonHide = document.getElementById("botonHide");
     const texto = document.getElementById("ejemplo2");
     botonHide.onclick = function(d) {
@@ -25,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function(){
         texto.style.display = "block"
     }
 
+    // Ejemplo 3
     const botonEditar = document.getElementById("botonEditar");
     botonEditar.onclick = function(d) {
         document.getElementById("ejemplo3").innerText = document.getElementById("textoEjemplo3").value

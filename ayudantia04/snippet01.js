@@ -1,6 +1,6 @@
 
-console.log("Hello, world!");
-console.log(d3.version);
+// console.log("Hello, world!");
+// console.log(d3.version);
 
 // ///////////////////////////////////////////////
 // const pokedex = ["Bulbasaur", "Ivysaur", "Venasaur", "Charmander",
@@ -38,14 +38,22 @@ console.log(d3.version);
 
 
 // const promise1 = new Promise((resolve, reject) => {
+//     // Indicamos que luego de 2 segundos, la función resolve retorne 'foo'.
 //     setTimeout(resolve, 2000, 'foo');
 // }).then(d => {
+//     // Tomamos lo retornado por resolve (d) y lo imprimimos en consola
+//     console.log(d);
+// }).catch(d => {
+//     // En caso de fallar la promesa, capturamos (catch)
+//     // lo retornado por reject (d) y lo imprimimos en consola
 //     console.log(d);
 // });
 // console.log(promise1);
 
 // async function waitAndLog(time, message) {
-//     await new Promise((resolve, reject) => {
+//     // Con await le decimos a la función que espere a que termine la promesa
+//     // antes de continuar con la siguiente línea (console.log('done'))
+//         await new Promise((resolve, reject) => {
 //         setTimeout(resolve, time, message);
 //     }).then(d => {
 //         console.log(d);
@@ -53,3 +61,4 @@ console.log(d3.version);
 //     console.log('done!');
 // }
 // waitAndLog(3000, 'foo');
+// console.log('running promise');

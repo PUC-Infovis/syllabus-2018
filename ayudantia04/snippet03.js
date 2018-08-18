@@ -13,14 +13,14 @@ const container = d3.select('body')
 
 
 // ///////////////////////////////////////////////
-// container.selectAll('rect')      // Los elementos del documento -- DOM.
-//          .data(dataset).enter()  // Los elementos de los datos.
-//        .append('rect')           // Añade un <rect> por cada dato entrante.
-//          .attr('width', 15)
-//          .attr('height', d => d * 50)
-//          .attr('x', (_, i) => i * 20)
-//          .attr('y', 0)
-//          .attr('fill', 'brown');
+container.selectAll('rect')      // Los elementos del documento -- DOM.
+         .data(dataset).enter()  // Los elementos de los datos.
+       .append('rect')           // Añade un <rect> por cada dato entrante.
+         .attr('width', 15)
+         .attr('height', d => d * 50)    // Para cada dato entrante (d), height será d * 50
+         .attr('x', (_, i) => i * 20)    // Para cada (dato, indice), la posición "x" del <rect> será el índice * 20
+         .attr('y', 0)
+         .attr('fill', 'brown');
 
 
 
@@ -54,6 +54,7 @@ const container = d3.select('body')
 //     }
 // };
 
+// En vez de definir un color, podemos entregarle una función que retorna el color dato el input.
 // container.selectAll('rect')
 //          .attr('fill', numberColor);
 

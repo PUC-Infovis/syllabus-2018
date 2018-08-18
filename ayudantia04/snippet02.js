@@ -16,6 +16,8 @@ for (let paragraph of paragraphs) {
 // header.text(`Mi versión de D3: v${d3.version}`);  // Cambia el texto.
 
 // ///////////////////////////////////////////////
+// Cuando realizamos una acción como ".style()", este retorna el mismo objeto
+// Por lo tanto, podemos concatenar las acciones
 // const header = d3.select('#d3-header')
 //                .style('color', 'blue')
 //                .text(`Mi versión de D3: v${d3.version}`);

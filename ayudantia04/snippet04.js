@@ -1,9 +1,15 @@
+// Cargar datos desde un directorio no es permitido directamente 
+// en algunos navegadores, como Google Chrome, por seguridad.
+// Puedes probar este código en Firefox, o correr un servidor local
+// que te permita cargar archivos desde el directorio.
+// Para referencia de esta última alternativa: 
+
 
 // d3.csv('./data/file.csv').then(dataset => {
 
-//     // dataset.forEach(d => {
-//     //     d.Age = parseFloat(d.Age);
-//     // });
+//     dataset.forEach(d => {
+//         d.Age = parseFloat(d.Age);
+//     });
 
 //     console.log(dataset);
 // });
@@ -38,7 +44,7 @@
 
 // ///////////////////////////////////////////////
 // const WIDTH  = 800;
-// const HEIGHT = 500;
+// const HEIGHT = 400;
 
 // const container = d3.select('body')
 //                     .append('svg')

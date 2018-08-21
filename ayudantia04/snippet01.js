@@ -2,13 +2,13 @@
 // console.log("Hello, world!");
 // console.log(d3.version);
 
-// ///////////////////////////////////////////////
+///////////////////////////////////////////////
 // const pokedex = ["Bulbasaur", "Ivysaur", "Venasaur", "Charmander",
 //                  "Charmeleon", "Charizard", "Squirtle",
 //                  "Wartortle", "Blastoise", "Caterpie"];
 // console.log(pokedex);
 
-// ///////////////////////////////////////////////
+///////////////////////////////////////////////
 // pokedex.forEach(name => {
 //     console.log(name);
 // });
@@ -30,6 +30,7 @@
 
 // ///////////////////////////////////////////////
 // const listedPokedex = pokedex.map((name, index) => `${index} - ${name}`);
+// console.log(pokedex);
 // console.log(listedPokedex);
 
 // ///////////////////////////////////////////////
@@ -53,7 +54,7 @@
 // async function waitAndLog(time, message) {
 //     // Con await le decimos a la función que espere a que termine la promesa
 //     // antes de continuar con la siguiente línea (console.log('done'))
-//         await new Promise((resolve, reject) => {
+//     await new Promise((resolve, reject) => { // Prueba removiendo await y viendo los cambios
 //         setTimeout(resolve, time, message);
 //     }).then(d => {
 //         console.log(d);

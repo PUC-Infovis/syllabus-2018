@@ -1,26 +1,28 @@
-const dataset = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5,
-                 8, 9, 7, 9, 3, 2, 3, 8, 4, 6,
-                 2, 6, 4, 3, 3, 8, 3, 2, 7, 9,
-                 5, 10, 2, 8, 8, 4, 1, 9, 7, 1];
+// const dataset = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5,
+//                  8, 9, 7, 9, 3, 2, 3, 8, 4, 6,
+//                  2, 6, 4, 3, 3, 8, 3, 2, 7, 9,
+//                  5, 10, 2, 8, 8, 4, 1, 9, 7, 1];
 
-const WIDTH  = 800;
-const HEIGHT = 500;
+// console.log(dataset);
 
-const container = d3.select('body')
-                    .append('svg')           // Añade elemento SVG,
-                    .attr('width', WIDTH)    // le ajusta su ancho,
-                    .attr('height', HEIGHT); // y también su altura.
+// const WIDTH  = 800;
+// const HEIGHT = 500;
+
+// const container = d3.select('body')
+//                     .append('svg')           // Añade elemento SVG,
+//                     .attr('width', WIDTH)    // le ajusta su ancho,
+//                     .attr('height', HEIGHT); // y también su altura.
 
 
 // ///////////////////////////////////////////////
-container.selectAll('rect')      // Los elementos del documento -- DOM.
-         .data(dataset).enter()  // Los elementos de los datos.
-       .append('rect')           // Añade un <rect> por cada dato entrante.
-         .attr('width', 15)
-         .attr('height', d => d * 50)    // Para cada dato entrante (d), height será d * 50
-         .attr('x', (_, i) => i * 20)    // Para cada (dato, indice), la posición "x" del <rect> será el índice * 20
-         .attr('y', 0)
-         .attr('fill', 'brown');
+// container.selectAll('rect')      // Los elementos del documento -- DOM.
+//          .data(dataset).enter()  // Unir elementos con los datos.
+//          .append('rect')         // Añade un <rect> por cada dato entrante.
+//          .attr('width', 15)
+//          .attr('height', d => d * 50)    // Para cada dato entrante (d), height será d * 50
+//          .attr('x', (_, i) => i * 20)    // Para cada (dato, indice), la posición "x" del <rect> será el índice * 20
+//          .attr('y', 0)
+//          .attr('fill', 'brown');
 
 
 
@@ -35,10 +37,10 @@ container.selectAll('rect')      // Los elementos del documento -- DOM.
 
 // container.selectAll('rect')
 //          .attr('width', 15)
-//          .attr('height', scale)
-//          .attr('x', (_, i) => i * 20)
-//          .attr('y', d => HEIGHT - scale(d))
-//          .attr('fill', 'brown');
+//          .attr('height', scale);
+
+// container.selectAll('rect')
+//          .attr('y', d => HEIGHT - scale(d));
 
 
 // ///////////////////////////////////////////////

@@ -1,8 +1,8 @@
 
-const paragraphs = document.getElementsByTagName('p');
-for (let paragraph of paragraphs) {
-    paragraph.style.setProperty('color', 'green');
-} // Estilo imperativo
+// const paragraphs = document.getElementsByTagName('p');
+// for (let paragraph of paragraphs) {
+//     paragraph.style.setProperty('color', 'green');
+// } // Estilo imperativo
 
 
 // ///////////////////////////////////////////////

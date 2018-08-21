@@ -11,7 +11,7 @@
 
 // // v3 y v4
 // d3.csv('./data/file.csv', dataset => {
-
+//     console.log(dataset);
 //     dataset.forEach(d => {
 //         d.Age = parseFloat(d.Age);
 //     });
@@ -57,7 +57,7 @@
 //         //  })
 //         //  .attr('stroke-width', (d, i, elems) => { //estilo v4
 //         //     console.log(this);
-//         //     console.log(elems[i]); //estilo v4
+//         //     // console.log(elems[i]); //estilo v4
 //         //     return 3;
 //         //  })
 //         ;

@@ -2,7 +2,11 @@
 // en algunos navegadores, como Google Chrome, por seguridad.
 // Puedes probar este código en Firefox, o correr un servidor local
 // que te permita cargar archivos desde el directorio.
-// Para referencia de esta última alternativa: 
+// Una forma fácil de montar un servidor local en el directorio usango Python 3.5 o sup:
+// Desde terminal:
+// cd 'path/a/directorio/con/ejemplos'
+// python -m http.server 8000
+// Puedes luego acceder a 'localhost:8000' en tu navegador favorito
 
 
 // d3.csv('./data/file.csv').then(dataset => {

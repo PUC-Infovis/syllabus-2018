@@ -39,8 +39,8 @@
 
 
 // const promise1 = new Promise((resolve, reject) => {
-//     // Indicamos que luego de 2 segundos, la función resolve retorne 'foo'.
-//     setTimeout(resolve, 2000, 'foo');
+// // Indicamos que luego de 2 segundos, la función resolve retorne 'foo'.
+// setTimeout(resolve, 2000, 'foo');
 // }).then(d => {
 //     // Tomamos lo retornado por resolve (d) y lo imprimimos en consola
 //     console.log(d);
@@ -51,15 +51,15 @@
 // });
 // console.log(promise1);
 
-// async function waitAndLog(time, message) {
-//     // Con await le decimos a la función que espere a que termine la promesa
-//     // antes de continuar con la siguiente línea (console.log('done'))
-//     await new Promise((resolve, reject) => { // Prueba removiendo await y viendo los cambios
-//         setTimeout(resolve, time, message);
-//     }).then(d => {
-//         console.log(d);
-//     });
-//     console.log('done!');
-// }
-// waitAndLog(3000, 'foo');
-// console.log('running promise');
+async function waitAndLog(time, message) {
+    // Con await le decimos a la función que espere a que termine la promesa
+    // antes de continuar con la siguiente línea (console.log('done'))
+    await new Promise((resolve, reject) => { // Prueba removiendo await y viendo los cambios
+        setTimeout(resolve, time, message);
+    }).then(d => {
+        console.log(d);
+    });
+    console.log('done!');
+}
+waitAndLog(1000, 'foo');
+console.log('running promise');

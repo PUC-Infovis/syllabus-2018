@@ -28,14 +28,16 @@ d3.json('./stacked-data.json').then(data => {
         const xScale = d3.scaleBand()
                     .rangeRound([0, width])
                     .domain(data.map(d => {return d.year}))
+                    .paddingInner(0.1)
 
         const yScale = d3.scaleLinear()
                         .range([height, 0])
                         .domain([0, 70000])
         
         const colorScale = d3.scaleOrdinal()
-                            .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b"])
-        
+                            // .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b"])
+                            .range(d3.schemeCategory10.slice(2,7))
+                            
         svg.selectAll(".serie")
             .data(series)
             .enter().append("g")
@@ -76,14 +78,14 @@ d3.json('./stacked-data.json').then(data => {
             .data(countries)
             .enter().append("g")
                 .attr("class", "legend")
-                .attr("transform", (d,i) => {console.log(d); return "translate(0," + i * 20 + ")"; })
+                .attr("transform", (d,i) => { return "translate(0," + i * 20 + ")"; })
                 .style("font", "10px sans-serif");
         
         legend.append("rect")
             .attr("x", width + 18)
             .attr("width", 18)
             .attr("height", 18)
-            .attr("fill", d => {console.log(d); return colorScale(d)});
+            .attr("fill", d => { return colorScale(d)});
   
         legend.append("text")
             .attr("x", width + 44)

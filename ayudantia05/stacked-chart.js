@@ -1,4 +1,4 @@
-const margin = {top: 20, right: 160, bottom: 35, left: 30};
+const margin = {top: 20, right: 165, bottom: 20, left: 30};
 
 const WIDTH = 960,
     HEIGHT = 500;
@@ -6,8 +6,7 @@ const WIDTH = 960,
 const width =  WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom;
 
-const countries = ['Venezuela', 'Peru', 'Argentina', 'Colombia']
-
+const countries = ['Venezuela', 'Peru', 'Argentina', 'Colombia'];
 
 const svg = d3.select('body')
     .append('svg')
@@ -18,26 +17,38 @@ const svg = d3.select('body')
 
 d3.json('./stacked-data.json').then(data => {
         
+        // Esto retorna un objeto Stack en d3, todavia no se realiza la transformación
+        // de la data. 
         const stack = d3.stack()
                     .keys(countries)
                     .order(d3.stackOrderNone)
                     .offset(d3.stackOffsetNone);
 
+        console.log(stack);
+
         const series = stack(data);
+        
+        console.log(series);
 
         const xScale = d3.scaleBand()
                     .rangeRound([0, width])
-                    .domain(data.map(d =>  d.year))
+                    .domain(data.map(d => d.year))
                     .paddingInner(0.1);
+
+        console.log(xScale('2011'));
+        console.log(xScale('2014'));
+
+        const maxPopulation = d3.max(series.flat(2));
 
         const yScale = d3.scaleLinear()
                         .range([height, 0])
-                        .domain([0, 70000]);
-        
+                        .domain([0, maxPopulation * 1.1]);
+
         const colorScale = d3.scaleOrdinal()
+                            .domain(countries)
                             // .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b'])
-                            .range(d3.schemeCategory10.slice(2,7));
-                            
+                            .range(d3.schemeCategory10.slice(1,6));
+        
         svg.selectAll('.serie')
             .data(series)
             .enter().append('g')
@@ -51,30 +62,26 @@ d3.json('./stacked-data.json').then(data => {
                     .attr('height', d => yScale(d[0]) - yScale(d[1]))
                     .attr('width', xScale.bandwidth());
 
+        const xAxis = d3.axisBottom(xScale);
+        const yAxis = d3.axisLeft(yScale).ticks(10, 's');
+
         svg.append('g')
                 .attr('class', 'axis axis--x')
                 .attr('transform', `translate(0,${height})`)
-                .call(d3.axisBottom(xScale))
-            .append('text')
-                .attr('x', width / 2)
-                .attr('y', yScale(0))
-                .attr('dy', '0.35em')
-                .attr('text-anchor', 'start')
-                .attr('fill', '#000')
-                .text('Year');
+                .call(xAxis)
 
         svg.append('g')
                 .attr('class', 'axis axis--y')
-                .call(d3.axisLeft(yScale).ticks(10, 's'))
-            .append('text')
-                .attr('x', 0)
-                .attr('y', yScale(yScale.ticks(10).pop()))
-                .attr('dy', '0.35em')
-                .attr('text-anchor', 'start')
-                .attr('fill', '#000')
-                .text('Population');
+                .call(yAxis)
+            // .append('text')
+            //     .attr('x', 0)
+            //     .attr('y', yScale)
+            //     .attr('dy', '0.35em')
+            //     .attr('text-anchor', 'start')
+            //     .attr('fill', '#000')
+            //     .attr('text', "Población')
 
-        legend = svg.selectAll('.legend')
+        const legend = svg.selectAll('.legend')
             .data(countries)
             .enter().append('g')
                 .attr('class', 'legend')

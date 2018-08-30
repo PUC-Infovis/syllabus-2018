@@ -1,4 +1,7 @@
-const margin = {top: 20, right: 165, bottom: 20, left: 30};
+// Toda la información utilizada se genero aleatoriamente, no hay ninguna
+// referencia con la realidad. 
+
+const margin = {top: 20, right: 165, bottom: 20, left: 70};
 
 const WIDTH = 960,
     HEIGHT = 500;
@@ -7,6 +10,14 @@ const width =  WIDTH - margin.left - margin.right,
     height = HEIGHT - margin.top - margin.bottom;
 
 const countries = ['Venezuela', 'Peru', 'Argentina', 'Colombia'];
+
+// Polyfill para poder hacer flatten de la data y poder calcular el máximo facilmente. Obviamente
+// hay otras formas de hacerlo, esta es solo una propuesta.
+const flatten = arr => {
+    return arr.reduce( (flat, toFlatten) => {
+        return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+      }, []);
+    }
 
 const svg = d3.select('body')
     .append('svg')
@@ -17,7 +28,7 @@ const svg = d3.select('body')
 
 d3.json('./stacked-data.json').then(data => {
         
-        // Esto retorna un objeto Stack en d3, todavia no se realiza la transformación
+        // Retorna un objeto Stack en d3, todavia no se realiza la transformación
         // de la data. 
         const stack = d3.stack()
                     .keys(countries)
@@ -29,7 +40,8 @@ d3.json('./stacked-data.json').then(data => {
         const series = stack(data);
         
         console.log(series);
-
+        
+        // Definimos la escala para el eje X para los años considerados
         const xScale = d3.scaleBand()
                     .rangeRound([0, width])
                     .domain(data.map(d => d.year))
@@ -38,12 +50,14 @@ d3.json('./stacked-data.json').then(data => {
         console.log(xScale('2011'));
         console.log(xScale('2014'));
 
-        const maxPopulation = d3.max(series.flat(2));
+        const maxPopulation = flatten(series);
 
+        // Definimos escala para eje y que representa la cantidad de inmigrantes
         const yScale = d3.scaleLinear()
                         .range([height, 0])
                         .domain([0, maxPopulation * 1.1]);
 
+        // Definimos la escala de colores para representar a cada país en cuestión
         const colorScale = d3.scaleOrdinal()
                             .domain(countries)
                             // .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b'])
@@ -73,13 +87,13 @@ d3.json('./stacked-data.json').then(data => {
         svg.append('g')
                 .attr('class', 'axis axis--y')
                 .call(yAxis)
-            // .append('text')
-            //     .attr('x', 0)
-            //     .attr('y', yScale)
-            //     .attr('dy', '0.35em')
-            //     .attr('text-anchor', 'start')
-            //     .attr('fill', '#000')
-            //     .attr('text', "Población')
+            .append('text')
+                .attr('x', 0)
+                .attr('y', yScale)
+                .attr('dy', '0.35em')
+                .attr('text-anchor', 'start')
+                .attr('fill', '#000')
+                .attr('text', 'Población')
 
         const legend = svg.selectAll('.legend')
             .data(countries)
@@ -93,7 +107,7 @@ d3.json('./stacked-data.json').then(data => {
             .attr('width', 18)
             .attr('height', 18)
             .attr('fill', colorScale);
-  
+
         legend.append('text')
             .attr('x', width + 44)
             .attr('y', 9)

@@ -1,4 +1,11 @@
+<<<<<<< HEAD
 const margin = {top: 20, right: 165, bottom: 20, left: 30};
+=======
+// Toda la información utilizada se genero aleatoriamente, no hay ninguna
+// referencia con la realidad. 
+
+const margin = {top: 20, right: 165, bottom: 20, left: 70};
+>>>>>>> ayudantia05
 
 const WIDTH = 960,
     HEIGHT = 500;
@@ -8,6 +15,16 @@ const width =  WIDTH - margin.left - margin.right,
 
 const countries = ['Venezuela', 'Peru', 'Argentina', 'Colombia'];
 
+// Polyfill para poder hacer flatten de la data y poder calcular el máximo facilmente. Obviamente
+// hay otras formas de hacerlo, esta es solo una propuesta.
+const flatten = arr => {
+    return arr.reduce( (flat, toFlatten) => {
+        return flat.concat(Array.isArray(toFlatten) ? flatten(toFlatten) : toFlatten);
+      }, []);
+    }
+
+// Creación del contenedor svg, se agrega un elemento g y se traslada siguiendo la convención de margenes utilizada en d3
+// Para más información el siguiente bl.ock puede ser útil: https://bl.ocks.org/mbostock/3019563/0a647e163b8e86eb043621fe1208c81396dea407
 const svg = d3.select('body')
     .append('svg')
         .attr('width', WIDTH)
@@ -15,9 +32,9 @@ const svg = d3.select('body')
     .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
-d3.json('./stacked-data.json').then(data => {
-        
-        // Esto retorna un objeto Stack en d3, todavia no se realiza la transformación
+d3.json('./stacked-data.json').then(data => {    
+
+        // Retorna un objeto Stack en d3, todavia no se realiza la transformación
         // de la data. 
         const stack = d3.stack()
                     .keys(countries)
@@ -29,7 +46,12 @@ d3.json('./stacked-data.json').then(data => {
         const series = stack(data);
         
         console.log(series);
+<<<<<<< HEAD
 
+=======
+        
+        // Definimos la escala para el eje X para los años considerados
+>>>>>>> ayudantia05
         const xScale = d3.scaleBand()
                     .rangeRound([0, width])
                     .domain(data.map(d => d.year))
@@ -38,12 +60,22 @@ d3.json('./stacked-data.json').then(data => {
         console.log(xScale('2011'));
         console.log(xScale('2014'));
 
+<<<<<<< HEAD
         const maxPopulation = d3.max(series.flat(2));
 
+=======
+        const maxPopulation = flatten(series);
+
+        // Definimos escala para eje y que representa la cantidad de inmigrantes
+>>>>>>> ayudantia05
         const yScale = d3.scaleLinear()
                         .range([height, 0])
                         .domain([0, maxPopulation * 1.1]);
 
+<<<<<<< HEAD
+=======
+        // Definimos la escala de colores para representar cada país
+>>>>>>> ayudantia05
         const colorScale = d3.scaleOrdinal()
                             .domain(countries)
                             // .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b'])
@@ -51,25 +83,42 @@ d3.json('./stacked-data.json').then(data => {
         
         svg.selectAll('.serie')
             .data(series)
+<<<<<<< HEAD
             .enter().append('g')
                 .attr('class', 'serie')
                 .attr('fill', d => colorScale(d.key))
             .selectAll('rect')
                 .data(d => d)
+=======
+            .enter().append('g') // Agrupamos cada país dentro de un mismo elemento g
+                .attr('class', 'serie')
+                .attr('fill', d => colorScale(d.key))
+            .selectAll('rect')
+                .data(d => d) 
+>>>>>>> ayudantia05
                 .enter().append('rect')
                     .attr('x', d => xScale(d.data.year))
                     .attr('y', d => yScale(d[1]))
                     .attr('height', d => yScale(d[0]) - yScale(d[1]))
                     .attr('width', xScale.bandwidth());
 
+<<<<<<< HEAD
         const xAxis = d3.axisBottom(xScale);
         const yAxis = d3.axisLeft(yScale).ticks(10, 's');
 
+=======
+        // Definicion de ejes inferior e izquierdo
+        const xAxis = d3.axisBottom(xScale);
+        const yAxis = d3.axisLeft(yScale).ticks(10, 's');
+
+        // Agregamos el eje X al gráfico cuando se llama a .call()
+>>>>>>> ayudantia05
         svg.append('g')
                 .attr('class', 'axis axis--x')
                 .attr('transform', `translate(0,${height})`)
                 .call(xAxis)
 
+<<<<<<< HEAD
         svg.append('g')
                 .attr('class', 'axis axis--y')
                 .call(yAxis)
@@ -81,25 +130,55 @@ d3.json('./stacked-data.json').then(data => {
             //     .attr('fill', '#000')
             //     .attr('text', "Población')
 
+=======
+        // Agregamos el eje Y al gráfico cuando se llama a .call()
+        svg.append('g')
+                .attr('class', 'axis axis--y')
+                .call(yAxis)
+            .append('text')
+                .attr('x', 0)
+                .attr('y', yScale)
+                .attr('dy', '0.35em')
+                .attr('text-anchor', 'start')
+                .attr('fill', '#000')
+                .attr('text', 'Población')
+
+        // Finalmente, necesitamos darle sentido a los colores mediante la codificación de estos y su país correspondiente
+>>>>>>> ayudantia05
         const legend = svg.selectAll('.legend')
             .data(countries)
             .enter().append('g')
                 .attr('class', 'legend')
+<<<<<<< HEAD
                 .attr('transform', (d,i) => `translate(0,${i * 20})`)
                 .style('font', '10px sans-serif');
         
+=======
+                .attr('transform', (d,i) => `translate(0,${i * 20})`)  // Realizamos la traslación para que las leyendas no se sobrepongan
+                .style('font', '10px sans-serif');
+        
+        // Definicion de los tamaños y colores de cada cuadrado de leyenda
+>>>>>>> ayudantia05
         legend.append('rect')
             .attr('x', width + 18)
             .attr('width', 18)
             .attr('height', 18)
             .attr('fill', colorScale);
+<<<<<<< HEAD
   
+=======
+
+        // Como los cuadrados por si solos siguen sin darnos información, agregamos el pais correspondiente a cada lado.
+>>>>>>> ayudantia05
         legend.append('text')
             .attr('x', width + 44)
             .attr('y', 9)
             .attr('dy', '.35em')
             .attr('text-anchor', 'start')
             .text(d => d);
+<<<<<<< HEAD
             
 
+=======
+>>>>>>> ayudantia05
     });

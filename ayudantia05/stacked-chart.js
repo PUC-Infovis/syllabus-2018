@@ -19,6 +19,8 @@ const flatten = arr => {
       }, []);
     }
 
+// Creación del contenedor svg, se agrega un elemento g y se traslada siguiendo la convención de margenes utilizada en d3
+// Para más información el siguiente bl.ock puede ser útil: https://bl.ocks.org/mbostock/3019563/0a647e163b8e86eb043621fe1208c81396dea407
 const svg = d3.select('body')
     .append('svg')
         .attr('width', WIDTH)
@@ -26,8 +28,8 @@ const svg = d3.select('body')
     .append('g')
         .attr('transform', `translate(${margin.left},${margin.top})`);
 
-d3.json('./stacked-data.json').then(data => {
-        
+d3.json('./stacked-data.json').then(data => {    
+
         // Retorna un objeto Stack en d3, todavia no se realiza la transformación
         // de la data. 
         const stack = d3.stack()
@@ -57,7 +59,7 @@ d3.json('./stacked-data.json').then(data => {
                         .range([height, 0])
                         .domain([0, maxPopulation * 1.1]);
 
-        // Definimos la escala de colores para representar a cada país en cuestión
+        // Definimos la escala de colores para representar cada país
         const colorScale = d3.scaleOrdinal()
                             .domain(countries)
                             // .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b'])
@@ -65,25 +67,28 @@ d3.json('./stacked-data.json').then(data => {
         
         svg.selectAll('.serie')
             .data(series)
-            .enter().append('g')
+            .enter().append('g') // Agrupamos cada país dentro de un mismo elemento g
                 .attr('class', 'serie')
                 .attr('fill', d => colorScale(d.key))
             .selectAll('rect')
-                .data(d => d)
+                .data(d => d) 
                 .enter().append('rect')
                     .attr('x', d => xScale(d.data.year))
                     .attr('y', d => yScale(d[1]))
                     .attr('height', d => yScale(d[0]) - yScale(d[1]))
                     .attr('width', xScale.bandwidth());
 
+        // Definicion de ejes inferior e izquierdo
         const xAxis = d3.axisBottom(xScale);
         const yAxis = d3.axisLeft(yScale).ticks(10, 's');
 
+        // Agregamos el eje X al gráfico cuando se llama a .call()
         svg.append('g')
                 .attr('class', 'axis axis--x')
                 .attr('transform', `translate(0,${height})`)
                 .call(xAxis)
 
+        // Agregamos el eje Y al gráfico cuando se llama a .call()
         svg.append('g')
                 .attr('class', 'axis axis--y')
                 .call(yAxis)
@@ -95,25 +100,26 @@ d3.json('./stacked-data.json').then(data => {
                 .attr('fill', '#000')
                 .attr('text', 'Población')
 
+        // Finalmente, necesitamos darle sentido a los colores mediante la codificación de estos y su país correspondiente
         const legend = svg.selectAll('.legend')
             .data(countries)
             .enter().append('g')
                 .attr('class', 'legend')
-                .attr('transform', (d,i) => `translate(0,${i * 20})`)
+                .attr('transform', (d,i) => `translate(0,${i * 20})`)  // Realizamos la traslación para que las leyendas no se sobrepongan
                 .style('font', '10px sans-serif');
         
+        // Definicion de los tamaños y colores de cada cuadrado de leyenda
         legend.append('rect')
             .attr('x', width + 18)
             .attr('width', 18)
             .attr('height', 18)
             .attr('fill', colorScale);
 
+        // Como los cuadrados por si solos siguen sin darnos información, agregamos el pais correspondiente a cada lado.
         legend.append('text')
             .attr('x', width + 44)
             .attr('y', 9)
             .attr('dy', '.35em')
             .attr('text-anchor', 'start')
             .text(d => d);
-            
-
     });

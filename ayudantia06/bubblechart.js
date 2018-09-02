@@ -80,6 +80,11 @@ enterCircle.on('click', (d) =>{
     }
 });
 
+d3.select('#clear').on('click', (_) =>{
+    clear();
+    d3.selectAll('circle').attr('class', 'inactive');
+});
+
 // Bonus: Interactuar con el Hover y seleccionar elemento en particular.
 // enterCircle.on('mouseover', (d, i , all) =>{
 //     d3.selectAll('circle').filter(circle => circle != d).style("opacity", 0.1)

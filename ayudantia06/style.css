@@ -1,0 +1,32 @@
+body {
+  margin: 0px auto;
+  max-width: 1200px;
+
+  color: #333;
+  font-family: 'Helvetica', 'Droid Sans', 'Arial', sans-serif;
+}
+
+#chart{
+  margin: 0px auto;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+
+}
+svg {
+  padding: 20px;
+  margin: 10px;
+  background-color: aliceblue;
+}
+
+#bubble, #bar{
+    display:inline;
+}
+
+.active{
+  fill: antiquewhite;
+}
+
+/* circle:hover{
+  fill: black;
+} */

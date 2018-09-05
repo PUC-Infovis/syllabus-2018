@@ -37,11 +37,15 @@ svg {
 
 .rect{
   fill: #de7701;
-
 }
 
 .text{
-  fill: #e9e9e9;
+  fill: black;
+}
+
+.axisname{
+  fill: black;
+  font-size: 13px;
 }
 
 /* circle:hover{

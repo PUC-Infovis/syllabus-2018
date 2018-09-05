@@ -1,4 +1,4 @@
-const marginBubble = {top: 20, right: 30, bottom: 30, left: 20};
+const marginBubble = {top: 40, right: 20, bottom: 70, left: 60};
 
 const WIDTHBUBBLE = 500
 const HEIGHTBUBBLE = 500
@@ -15,7 +15,6 @@ const containerBubblechart = d3.select('#bubble')
 
 // Definimos ls circulos de la lista data
 d3.csv("data.csv").then(data => {
-    console.log(data);
     const circle = containerBubblechart.selectAll('circle').data(data);
 
     // Creamos una escala lineal cuyo dominio será de 0 y max*0.1. Donde máx es el máximo de los datos
@@ -28,14 +27,14 @@ d3.csv("data.csv").then(data => {
     // Notar que está inverso porque el 0 está arriba y nosotros queremos que mientras más bajo sea el valor
     // más abajo esté.
     var yscale = d3.scaleLinear()
-                        .range([heightBubble, 0])
+                    .range([heightBubble, 0])
                     .domain([0, d3.max(data, d => +d.men) * 1.1]);
 
     // Agregamos cada circulo
     var enterCircle = circle.enter().append('circle')
-        .attr('cx', d => {console.log(xscale(+d.women)); return xscale(+d.women)})
+        .attr('cx', d => xscale(+d.women))
         .attr('cy', d => yscale(+d.men))
-        .attr('r', 5)
+        .attr('r', 10)
         .attr('class', 'inactive ball');
 
     // Definimos una interacción con el 'click' para que hacer click en la burbuja, esta se agregue al barchart.    
@@ -56,13 +55,40 @@ d3.csv("data.csv").then(data => {
     // Agregamos un 'g' al gráfico para cada eje
     const xAxisBubble = containerBubblechart
             .append('g')
-            .attr('transform', `translate(${marginBubble.left}, ${heightBubble})`);
+            .attr('transform', `translate(0, ${heightBubble})`);
     const yAxisBubbles = containerBubblechart.append('g')
-            .attr('transform', `translate(${marginBubble.left}, 0)`);
 
     // Utilizamos el método call para que se generen los ejes según la escala asociada en cada 'g'
     xAxisBubble.call(axisBottom);
     yAxisBubbles.call(axisLeft);
+
+    // Agregamos nombre al eje x para determinar que estamos considerando la cantidad de mujeres
+    containerBubblechart.append("text")             
+            .attr("transform",
+                  "translate(" + (widthBubble/2) + " ," + 
+                                 (heightBubble + marginBubble.top + 20) + ")")
+            .style("text-anchor", "middle")
+            .attr("class", "axisname")
+            .text("Mujeres");
+
+    // Agregamos nombre al eje y para determinar que estamos considerando la cantidad de hombres
+    containerBubblechart.append("text")
+            .attr("transform", "rotate(-90)")
+            .attr("y", 0 - marginBubble.left)
+            .attr("x",0 - (heightBubble / 2))
+            .attr("dy", "1em")
+            .style("text-anchor", "middle")
+            .attr("class", "axisname")
+            .text("Hombres"); 
+
+    // Finalmente agregamos un titulo al gráfico. ¿Por qué a quien no le gustan los titulos?
+    containerBubblechart.append("text")
+            .attr("x", (WIDTHBUBBLE / 2))             
+            .attr("y", 0 - (marginBubble.top / 2))
+            .attr("text-anchor", "middle")  
+            .style("font-size", "16px") 
+            .style("text-decoration", "underline")  
+            .text("Llegada de inmigrantes en 2016");
 
     d3.select('#clear').on('click', (_) =>{
         clear();

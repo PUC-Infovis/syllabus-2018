@@ -1,15 +1,10 @@
-const margin = {top: 0, right: 20, bottom: 0, left: 20};
+const margin = {top: 30, right: 20, bottom: 0, left: 20};
 
 const WIDTH = 500;
 const HEIGHT = 500;
 
 const width =  WIDTH - margin.left - margin.right;
 const height = HEIGHT - margin.top - margin.bottom;
-
-const color = {
-    bar: 'Black',
-    text: "White",
-}
 
 const containerBarchart = d3.select('#bar')
     .append('svg')
@@ -21,7 +16,7 @@ const containerBarchart = d3.select('#bar')
 
 const scale = d3.scaleLinear()
                 .range([margin.right, width])
-                .domain([0, 30000]);
+                .domain([0, 70000]);
 
 const xAxis = d3.axisBottom(scale).ticks(7);
 const axis = containerBarchart.append('g')
@@ -29,11 +24,18 @@ const axis = containerBarchart.append('g')
 
 axis.call(xAxis)
 
+containerBarchart.append("text")
+        .attr("x", (width / 2))             
+        .attr("y", 0 - (margin.top / 2))
+        .attr("text-anchor", "middle")  
+        .style("font-size", "16px") 
+        .style("text-decoration", "underline")  
+        .text("Inmigrantes totales por país");
+
 const lista_final = [];
 
 const actualizarBarchart = (cantidad, label) => {
     lista_final.push({label, cantidad});
-    console.log(lista_final, label)
 
     const data = containerBarchart.selectAll('.rect').data(lista_final);
 
@@ -59,7 +61,7 @@ const actualizarBarchart = (cantidad, label) => {
         .text(d => d.label);
 
     axis.attr('transform', `translate(0,${lista_final.length*30 + 15})`)
-    
+
 }
 
 const clear = () => {

@@ -61,7 +61,6 @@ const actualizarBarchart = (cantidad, label) => {
         .text(d => d.label);
 
     axis.attr('transform', `translate(0,${lista_final.length*30 + 15})`)
-
 }
 
 const clear = () => {

@@ -5,7 +5,7 @@ const HEIGHTBUBBLE = 500
 
 const widthBubble =  WIDTHBUBBLE - marginBubble.left - marginBubble.right;
 const heightBubble = HEIGHTBUBBLE - marginBubble.top - marginBubble.bottom;
-console.log(widthBubble, heightBubble)
+
 const containerBubblechart = d3.select('#bubble')
     .append('svg')
         .attr('width', WIDTHBUBBLE)

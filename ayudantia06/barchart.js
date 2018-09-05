@@ -21,9 +21,9 @@ const containerBarchart = d3.select('#bar')
 
 const scale = d3.scaleLinear()
                 .range([margin.right, width])
-                .domain([0, 300]);
+                .domain([0, 30000]);
 
-const xAxis = d3.axisBottom(scale);
+const xAxis = d3.axisBottom(scale).ticks(7);
 const axis = containerBarchart.append('g')
         .attr('class', 'axis axis--x')
 

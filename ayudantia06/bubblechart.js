@@ -1,17 +1,11 @@
-const marginBubble = {top: 20, right: 30, bottom: 30, left: 20};
+const marginBubble = {top: 20, right: 30, bottom: 30, left: 40};
 
 const WIDTHBUBBLE = 500
 const HEIGHTBUBBLE = 500
 
 const widthBubble =  WIDTHBUBBLE - marginBubble.left - marginBubble.right;
 const heightBubble = HEIGHTBUBBLE - marginBubble.top - marginBubble.bottom;
-
-// Definimos los colores para el gráfico
-const colorBubble = {
-    bubble: 'Magenta',
-    text: "White",
-}
-
+console.log(widthBubble, heightBubble)
 const containerBubblechart = d3.select('#bubble')
     .append('svg')
         .attr('width', WIDTHBUBBLE)
@@ -19,45 +13,28 @@ const containerBubblechart = d3.select('#bubble')
     .append('g')
         .attr('transform', `translate(${marginBubble.left},${marginBubble.top})`)
 
-
-// Creamos una escala lineal cuyo dominio será de 0 y 70 y devolverá un número entre 0 y widthBubble
-var xscale = d3.scaleLinear()
-                .range([0, widthBubble])
-                .domain([0, 200]);
-
-// Creamos una escala lineal cuyo dominio será de 0 y 70 y devolverá un número entre heightBubble y 0.
-// Notar que está inverso porque el 0 está arriba y nosotros queremos que mientras más bajo sea el valor
-// más abajo esté.
-var yscale = d3.scaleLinear()
-                .range([heightBubble, 0])
-                .domain([0, 200]);
-
-
-// Generemos los ejes
-var axisBottom = d3.axisBottom(xscale).tickPadding(10);
-var axisLeft = d3.axisLeft(yscale).tickPadding(10);
-
-// Agregamos un 'g' al gráfico para cada eje
-const xAxisBubble = containerBubblechart
-                .append('g')
-                .attr('transform', `translate(${marginBubble.left}, ${heightBubble})`);
-
-const yAxisBubbles = containerBubblechart.append('g')
-                .attr('transform', `translate(${marginBubble.left}, 0)`);
-
-
-// Utilizamos el método call para que se generen los ejes según la escala asociada en cada 'g'
-xAxisBubble.call(axisBottom);
-yAxisBubbles.call(axisLeft);
-
 // Definimos ls circulos de la lista data
 d3.csv("data.csv").then(data => {
+    console.log(data);
     const circle = containerBubblechart.selectAll('circle').data(data);
+
+    // Creamos una escala lineal cuyo dominio será de 0 y max*0.1. Donde máx es el máximo de los datos
+    // y devolverá un número entre 0 y widthBubble
+    var xscale = d3.scaleLinear()
+                    .range([0, widthBubble])
+                    .domain([0, d3.max(data, d => +d.women) * 1.1]);
+
+    // Creamos una escala lineal cuyo dominio será de 0 y 70 y devolverá un número entre heightBubble y 0.
+    // Notar que está inverso porque el 0 está arriba y nosotros queremos que mientras más bajo sea el valor
+    // más abajo esté.
+    var yscale = d3.scaleLinear()
+                    .range([heightBubble, 0])
+                    .domain([0, d3.max(data, d => +d.men) * 1.1]);
 
     // Agregamos cada circulo
     var enterCircle = circle.enter().append('circle')
-        .attr('cx', d => xscale(d.women))
-        .attr('cy', d => yscale(d.men))
+        .attr('cx', d => {console.log(xscale(+d.women)); return xscale(+d.women)})
+        .attr('cy', d => yscale(+d.men))
         .attr('r', 10)
         .attr('class', 'inactive ball');
 
@@ -71,6 +48,21 @@ d3.csv("data.csv").then(data => {
             actualizarBarchart(total, d.country)
         }
     });
+
+    // Generemos los ejes
+    var axisBottom = d3.axisBottom(xscale).tickPadding(10).ticks(7, 's');
+    var axisLeft = d3.axisLeft(yscale).tickPadding(10).ticks(10, 's');
+
+    // Agregamos un 'g' al gráfico para cada eje
+    const xAxisBubble = containerBubblechart
+            .append('g')
+            .attr('transform', `translate(${marginBubble.left}, ${heightBubble})`);
+    const yAxisBubbles = containerBubblechart.append('g')
+            .attr('transform', `translate(${marginBubble.left}, 0)`);
+
+    // Utilizamos el método call para que se generen los ejes según la escala asociada en cada 'g'
+    xAxisBubble.call(axisBottom);
+    yAxisBubbles.call(axisLeft);
 
     d3.select('#clear').on('click', (_) =>{
         clear();

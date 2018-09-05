@@ -59,7 +59,6 @@ d3.csv("data.csv").then(data => {
         .attr('cx', d => xscale(d.women))
         .attr('cy', d => yscale(d.men))
         .attr('r', 10)
-        // .attr('fill', colorBubble.bubble)
         .attr('class', 'inactive ball');
 
     // Definimos una interacción con el 'click' para que hacer click en la burbuja, esta se agregue al barchart.    
@@ -75,18 +74,18 @@ d3.csv("data.csv").then(data => {
 
     d3.select('#clear').on('click', (_) =>{
         clear();
-        d3.selectAll('circle').attr('class', 'inactive');
+        d3.selectAll('circle').attr('class', 'inactive ball');
     });
 
     // Bonus: Interactuar con el Hover y seleccionar elemento en particular.
-    // enterCircle.on('mouseover', (d, i , all) =>{
-    //     d3.selectAll('circle').filter(circle => circle != d).style("opacity", 0.1)
-    //     d3.select(all[i]).transition().attr('r', 20);
+    //     enterCircle.on('mouseover', (d, i , all) =>{
+    //         d3.selectAll('circle').filter(circle => circle != d).style("opacity", 0.1)
+    //         d3.select(all[i]).transition().attr('r', 20);
+    // // 
+    //     });
 
-    // });
-
-    // enterCircle.on('mouseout', (_, i, all) =>{
-    //     d3.select(all[i]).transition().attr('r', 10);
-    //     d3.selectAll('circle').style("opacity", 1)
-    // });
+    //     enterCircle.on('mouseout', (_, i, all) =>{
+    //         d3.select(all[i]).transition().attr('r', 10);
+    //         d3.selectAll('circle').style("opacity", 1)
+    //     });
 })

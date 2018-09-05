@@ -24,23 +24,24 @@ svg {
 }
 
 .ball{
-  fill: blue;
+  fill: #de7701;
 }
 
 
 .active{
-  fill: lightskyblue;
-  stroke: black;
-  stroke-width: 2px;
+  fill: #de7701;
+  stroke: #a80e06;
+  stroke-width: 3px;
+  opacity: 1
 }
 
 .rect{
-  fill: lightskyblue;
+  fill: #de7701;
 
 }
 
 .text{
-  fill:black;
+  fill: #e9e9e9;
 }
 
 /* circle:hover{

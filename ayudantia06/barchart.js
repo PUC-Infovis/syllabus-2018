@@ -44,7 +44,6 @@ const actualizarBarchart = (cantidad, label) => {
         .attr('y', (_, i) => i*30 + 15)
         .attr('height', 20)
 
-
     const enteringtext = data.enter()
         .append('text')
         .attr('class', 'text')

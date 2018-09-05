@@ -1,4 +1,4 @@
-const marginBubble = {top: 20, right: 30, bottom: 30, left: 40};
+const marginBubble = {top: 20, right: 30, bottom: 30, left: 20};
 
 const WIDTHBUBBLE = 500
 const HEIGHTBUBBLE = 500
@@ -28,14 +28,14 @@ d3.csv("data.csv").then(data => {
     // Notar que está inverso porque el 0 está arriba y nosotros queremos que mientras más bajo sea el valor
     // más abajo esté.
     var yscale = d3.scaleLinear()
-                    .range([heightBubble, 0])
+                        .range([heightBubble, 0])
                     .domain([0, d3.max(data, d => +d.men) * 1.1]);
 
     // Agregamos cada circulo
     var enterCircle = circle.enter().append('circle')
         .attr('cx', d => {console.log(xscale(+d.women)); return xscale(+d.women)})
         .attr('cy', d => yscale(+d.men))
-        .attr('r', 10)
+        .attr('r', 5)
         .attr('class', 'inactive ball');
 
     // Definimos una interacción con el 'click' para que hacer click en la burbuja, esta se agregue al barchart.    

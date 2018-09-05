@@ -1,4 +1,4 @@
-const margin = {top: 0, right: 0, bottom: 0, left: 0};
+const margin = {top: 0, right: 20, bottom: 0, left: 20};
 
 const WIDTH = 500;
 const HEIGHT = 500;
@@ -21,7 +21,7 @@ const containerBarchart = d3.select('#bar')
 
 const scale = d3.scaleLinear()
                 .range([margin.right, width])
-                .domain([0, 50]);
+                .domain([0, 300]);
 
 const xAxis = d3.axisBottom(scale);
 const axis = containerBarchart.append('g')
@@ -44,15 +44,14 @@ const actualizarBarchart = (cantidad, label) => {
         .attr('y', (_, i) => i*30 + 15)
         .attr('fill', color.bar)
         .attr('height', 20)
-        .style('stroke', '#333')
-        .style('stroke-width', '2px')
+
 
     const enteringtext = data.enter()
         .append('text')
         .attr('class', 'text')
         .attr('x', margin.right)
         .attr('y', (_, i) => i*30 + 30)
-        .style('fill', color.text)
+        // .style('fill', color.text)
         
 
     enteringBar.transition()

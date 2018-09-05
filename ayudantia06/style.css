@@ -16,15 +16,31 @@ body {
 svg {
   padding: 20px;
   margin: 10px;
-  background-color: aliceblue;
+  background-color: white;
 }
 
 #bubble, #bar{
     display:inline;
 }
 
+.ball{
+  fill: blue;
+}
+
+
 .active{
-  fill: antiquewhite;
+  fill: lightskyblue;
+  stroke: black;
+  stroke-width: 2px;
+}
+
+.rect{
+  fill: lightskyblue;
+
+}
+
+.text{
+  fill:black;
 }
 
 /* circle:hover{

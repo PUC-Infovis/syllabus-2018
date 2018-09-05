@@ -42,7 +42,6 @@ const actualizarBarchart = (cantidad, label) => {
         .attr('class', 'rect')
         .attr('x', margin.right)
         .attr('y', (_, i) => i*30 + 15)
-        .attr('fill', color.bar)
         .attr('height', 20)
 
 
@@ -50,9 +49,7 @@ const actualizarBarchart = (cantidad, label) => {
         .append('text')
         .attr('class', 'text')
         .attr('x', margin.right)
-        .attr('y', (_, i) => i*30 + 30)
-        // .style('fill', color.text)
-        
+        .attr('y', (_, i) => i*30 + 30)        
 
     enteringBar.transition()
         .duration(500)

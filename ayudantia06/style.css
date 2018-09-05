@@ -11,7 +11,12 @@ body {
   width: 100%;
   display: inline-block;
   text-align: center;
+}
 
+.center{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
 }
 svg {
   padding: 20px;

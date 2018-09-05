@@ -79,7 +79,7 @@ const clear = () => {
         .text('')
         .remove();
     
-    axis.attr('transform', `translate(0,${lista_final.length*30 + 15})`)
+    axis.transition().delay(500).attr('transform', `translate(0,${lista_final.length*30 + 15})`)
 }
 
 // actualizarBarchart(10, "Profesor 1");

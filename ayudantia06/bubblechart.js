@@ -96,14 +96,17 @@ d3.csv("data.csv").then(data => {
     });
 
     // Bonus: Interactuar con el Hover y seleccionar elemento en particular.
-    //     enterCircle.on('mouseover', (d, i , all) =>{
-    //         d3.selectAll('circle').filter(circle => circle != d).style("opacity", 0.1)
-    //         d3.select(all[i]).transition().attr('r', 20);
-    // // 
-    //     });
+    enterCircle.on('mouseover', (d, i , all) =>{
+        // Buscamos todos los circulos que no son el donde está el mouse
+        d3.selectAll('circle').filter(circle => circle != d).style("opacity", 0.1)
 
-    //     enterCircle.on('mouseout', (_, i, all) =>{
-    //         d3.select(all[i]).transition().attr('r', 10);
-    //         d3.selectAll('circle').style("opacity", 1)
-    //     });
+        // Seleccionamos nuestro circulo y le cambiamos el radio.
+        d3.select(all[i]).transition().attr('r', 20);
+
+    });
+
+    enterCircle.on('mouseout', (_, i, all) =>{
+        d3.select(all[i]).transition().attr('r', 10);
+        d3.selectAll('circle').style("opacity", 1)
+    });
 })

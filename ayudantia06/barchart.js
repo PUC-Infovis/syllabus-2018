@@ -57,7 +57,7 @@ const actualizarBarchart = (cantidad, label) => {
         .attr('width', d => scale(d.cantidad) - margin.right);
    
     enteringtext.transition()
-        .duration(500)
+        .delay(500)
         .text(d => d.label);
 
     axis.attr('transform', `translate(0,${lista_final.length*30 + 15})`)
@@ -76,15 +76,12 @@ const clear = () => {
     
     dataText.exit()
         .transition()
-        .duration(500)
+        .delay(500)
         .text('')
         .remove();
     
     axis.transition().delay(500).attr('transform', `translate(0,${lista_final.length*30 + 15})`)
 }
-
-// actualizarBarchart(10, "Profesor 1");
-// actualizarBarchart(20, "Profesor 2");
 
 
             

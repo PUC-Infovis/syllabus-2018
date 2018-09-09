@@ -1,0 +1,58 @@
+body {
+  margin: 0px auto;
+  max-width: 1200px;
+
+  color: #333;
+  font-family: 'Helvetica', 'Droid Sans', 'Arial', sans-serif;
+}
+
+#chart{
+  margin: 0px auto;
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+}
+
+.center{
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+svg {
+  padding: 20px;
+  margin: 10px;
+  background-color: white;
+}
+
+#bubble, #bar{
+    display:inline;
+}
+
+.ball{
+  fill: #de7701;
+}
+
+
+.active{
+  fill: #de7701;
+  stroke: #a80e06;
+  stroke-width: 3px;
+  opacity: 1
+}
+
+.rect{
+  fill: #de7701;
+}
+
+.text{
+  fill: black;
+}
+
+.axisname{
+  fill: black;
+  font-size: 13px;
+}
+
+/* circle:hover{
+  fill: black;
+} */

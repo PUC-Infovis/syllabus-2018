@@ -1,3 +1,5 @@
+// Para más referencia respecto a los métodos utilizados:
+// https://github.com/d3/d3-force#simulation_alpha
 
 const WIDTH = 1500;
 const HEIGHT = 700;
@@ -91,7 +93,7 @@ const dragged = (node) => {
 
 const dragended = (node) => {
   if (!d3.event.active) {
-    // Cambiar el alphaTarget a 0 hace que el alpha comience a dominuir y así la simulación puede acabar
+    // Cambiar el alphaTarget a 0 hace que el alpha comience a disminuir y así la simulación puede acabar
     simulation.alphaTarget(0.0);
   }
   node.fx = null;

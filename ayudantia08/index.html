@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>d3-geo</title>
+    <style media='screen'>
+        body {
+            margin: 3em auto;
+            max-width: 1000px;
+        }
+
+        .states {
+            fill: #6f7bbe;
+        }
+
+        .states :hover, .states .active {
+            fill: #a0a8d7;
+        }
+
+        .state-borders {
+          fill: none;
+          stroke: white;
+          stroke-width: 2.5px;
+          stroke-linejoin: round;
+          stroke-linecap: round;
+          pointer-events: none;
+        }
+
+        .county-borders {
+          fill: none;
+          stroke: white;
+          stroke-width: 1px;
+          stroke-linejoin: round;
+          stroke-linecap: round;
+          pointer-events: none;
+        }
+    </style>
+    <!-- Importamos D3 -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.js'
+            charset='utf-8'></script>
+    <!-- Importamos utilidades para trabajar con TopoJSON -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.js"></script>
+    </head>
+    <body>
+      <div id='container'></div>
+      <script src='script01.js' charset='utf-8'></script>
+      <!-- <script src='script02.js' charset='utf-8'></script> -->
+  </body>
+</html>

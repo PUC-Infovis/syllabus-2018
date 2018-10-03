@@ -1,13 +1,4 @@
 
-const WIDTH = 720;
-const HEIGHT = 600;
-const MARGIN = { TOP: 40, BOTTOM: 40, LEFT: 50, RIGHT: 50 };
-const PADDING = 30;
-const DASHSIZE = 70;
-
-const width = WIDTH - MARGIN.RIGHT - MARGIN.LEFT;
-const height = HEIGHT - MARGIN.TOP - MARGIN.BOTTOM;
-
 const getNormalGenerator = (mu, sigma) => () => Math.floor(d3.randomNormal(mu, sigma)());
 
 const weigthGen1 = getNormalGenerator(50, 7);
@@ -25,6 +16,15 @@ const dataset = [
 ];
 console.log(dataset);
 
+const WIDTH = 720;
+const HEIGHT = 600;
+const MARGIN = { TOP: 40, BOTTOM: 40, LEFT: 50, RIGHT: 50 };
+const PADDING = 30;
+const DASHSIZE = 70;
+
+const width = WIDTH - MARGIN.RIGHT - MARGIN.LEFT;
+const height = HEIGHT - MARGIN.TOP - MARGIN.BOTTOM;
+
 const container = d3.select('#container')
                     .append('svg')
                       .attr('width', WIDTH)
@@ -35,7 +35,6 @@ const container = d3.select('#container')
 const scatterplot = container.append('g')
                                .attr('id', 'scatterplot')
                                .attr('transform', `translate(${2 * DASHSIZE}, 0)`);
-
 
 scatterplot.append('rect')
              .attr('width', width - 2 * DASHSIZE )
@@ -66,22 +65,26 @@ hDashed.append('rect')
          .attr('stroke', '#ccc')
          .attr('stroke-width', 1);
 
-const xscale = d3.scaleLinear().range([0, width - 2 * DASHSIZE]);
-const yscale = d3.scaleLinear().range([height - 2 * DASHSIZE, 0]);
+const xscale = d3.scaleLinear()
+                 .domain([0, d3.max(dataset, d => d.weight) + 20])
+                 .range([0, width - 2 * DASHSIZE]);
+const yscale = d3.scaleLinear()
+                 .domain([0, d3.max(dataset, d => d.height) + 20])
+                 .range([height - 2 * DASHSIZE, 0]);
 
-const axisBottom = d3.axisBottom(xscale).ticks(8);
-const axisLeft = d3.axisLeft(yscale).ticks(8);
+const axisBottom = d3.axisBottom(xscale);
+const axisLeft = d3.axisLeft(yscale);
 
 const colorScale = d3.scaleOrdinal().range(['red', 'blue', 'green']);
 const dashScale = d3.scaleOrdinal()
                     .range([0, (DASHSIZE - 10) / 3 + 5, 2 * (DASHSIZE - 10) / 3 + 10]);
 
-const xAxisSC = container.append('g')
+const xAxisSP = container.append('g')
                           .attr('class', 'axis axis--x')
                           .attr('transform', 
                                 `translate(${2 * DASHSIZE}, ${height - 2 * DASHSIZE})`);
 
-const yAxisSC = container.append('g')
+const yAxisSP = container.append('g')
                          .attr('class', 'axis axis--y')
                          .attr('transform',
                                `translate(${2 * DASHSIZE}, 0)`);
@@ -94,49 +97,40 @@ const xAxisH = container.append('g')
 const yAxisV = container.append('g')
                          .attr('class', 'axis axis--y');
 
-xscale.domain([0, d3.max(dataset, d => d.weight) + 20]);
-yscale.domain([0, d3.max(dataset, d => d.height) + 20]);
 
-xAxisSC.call(axisBottom)
+xAxisSP.call(axisBottom)
        .selectAll('.tick')
-       .append('line')
+       .select('line')
+       .attr('class', 'background')
        .attr('y2', - (height - 2 * DASHSIZE))
        .attr('stroke', '#aaa')
        .attr('opacity', 0.5);
      
-yAxisSC.call(axisLeft)
+yAxisSP.call(axisLeft)
        .selectAll('.tick')
-       .append('line')
+       .select('line')
+       .attr('class', 'background')
        .attr('x2', width - 2 * DASHSIZE)
        .attr('stroke', '#aaa')
        .attr('opacity', 0.5);
 
 xAxisH.call(axisBottom);
-xAxisH.selectAll('.tick')
-      .select('text').remove();
-xAxisH.selectAll('.tick')
-      .select('line').remove();
+xAxisH.selectAll('.tick').select('text').remove();
 xAxisH.select('.domain').remove();
 xAxisH.selectAll('.tick')
-      .append('line')
+      .select('line')
       .attr('y2', DASHSIZE)
       .attr('stroke', '#aaa')
       .attr('opacity', 0.5);
 
 yAxisV.call(axisLeft);
-yAxisV.selectAll('.tick')
-      .select('text').remove();
-yAxisV.selectAll('.tick')
-      .select('line').remove();
+yAxisV.selectAll('.tick').select('text').remove();
 yAxisV.select('.domain').remove();
 yAxisV.selectAll('.tick')
-      .append('line')
+      .select('line')
       .attr('x2', DASHSIZE)
       .attr('stroke', '#aaa')
       .attr('opacity', 0.5);
-
-console.log(axisBottom);
-console.log(axisLeft);
     
 const dots = scatterplot.selectAll('circle')
                         .data(dataset)
@@ -169,62 +163,62 @@ const hLines = hDashed.selectAll('line')
                         .attr('stroke', d => colorScale(d.country))
                         .attr('stroke-width', 1);
 
-const isInSelection = (d, selection, orientation = 'XY') => {
-    if (orientation === 'X') {
-        const x1 = selection[0],
-              x2 = selection[1];
-        return x1 <= xscale(d.weight) && xscale(d.weight) <= x2;
-    } else if (orientation === 'Y') {
-        const y1 = selection[0],
-              y2 = selection[1];
-        return y1 <= yscale(d.height) && yscale(d.height) <= y2;
-    } else {
-        const x1 = selection[0][0],
-              y1 = selection[0][1],
-              x2 = selection[1][0],
-              y2 = selection[1][1];
-        return x1 <= xscale(d.weight) && xscale(d.weight) <= x2 
-            && y1 <= yscale(d.height) && yscale(d.height) <= y2;
-    }
-};
+// const isInSelection = (d, selection, orientation = 'XY') => {
+//     if (orientation === 'X') {
+//         const x1 = selection[0],
+//               x2 = selection[1];
+//         return x1 <= xscale(d.weight) && xscale(d.weight) <= x2;
+//     } else if (orientation === 'Y') {
+//         const y1 = selection[0],
+//               y2 = selection[1];
+//         return y1 <= yscale(d.height) && yscale(d.height) <= y2;
+//     } else {
+//         const x1 = selection[0][0],
+//               y1 = selection[0][1],
+//               x2 = selection[1][0],
+//               y2 = selection[1][1];
+//         return x1 <= xscale(d.weight) && xscale(d.weight) <= x2 
+//             && y1 <= yscale(d.height) && yscale(d.height) <= y2;
+//     }
+// };
 
-const brushed = (orientation = 'XY') => () => {
-    const selection = d3.event.selection;
-//     console.log(d3.event);
-    dots.classed('not-selected', d => !isInSelection(d, selection, orientation));
-    vLines.classed('not-selected', d => !isInSelection(d, selection, orientation));
-    hLines.classed('not-selected', d => !isInSelection(d, selection, orientation));
-};
-const brushended = () => {
-    if (!d3.event.selection) {
-        dots.classed('not-selected', false);
-        vLines.classed('not-selected', false);
-        hLines.classed('not-selected', false);
-    }
-};
+// const brushed = (orientation = 'XY') => () => {
+//     const selection = d3.event.selection;
+// //     console.log(d3.event);
+//     dots.classed('not-selected', d => !isInSelection(d, selection, orientation));
+//     vLines.classed('not-selected', d => !isInSelection(d, selection, orientation));
+//     hLines.classed('not-selected', d => !isInSelection(d, selection, orientation));
+// };
+// const brushended = () => {
+//     if (!d3.event.selection) {
+//         dots.classed('not-selected', false);
+//         vLines.classed('not-selected', false);
+//         hLines.classed('not-selected', false);
+//     }
+// };
 
-const brushSC = d3.brush()
-                  .extent([[0, 0], [width - 2 * DASHSIZE, height - 2 * DASHSIZE]])
-                  .on('start brush', brushed())
-                  .on('end', brushended);
+// const brushSC = d3.brush()
+//                   .extent([[0, 0], [width - 2 * DASHSIZE, height - 2 * DASHSIZE]])
+//                   .on('start brush', brushed())
+//                   .on('end', brushended);
 
-container.append("g")
-         .attr('transform', `translate(${2 * DASHSIZE}, 0)`)
-         .call(brushSC);
+// container.append("g")
+//          .attr('transform', `translate(${2 * DASHSIZE}, 0)`)
+//          .call(brushSC);
 
-const brushV = d3.brushY()
-                 .extent([[0, 0], [DASHSIZE, height - 2 * DASHSIZE]])
-                 .on('start brush', brushed('Y'))
-                 .on('end', brushended);
+// const brushV = d3.brushY()
+//                  .extent([[0, 0], [DASHSIZE, height - 2 * DASHSIZE]])
+//                  .on('start brush', brushed('Y'))
+//                  .on('end', brushended);
 
-container.append("g")
-         .call(brushV);
+// container.append("g")
+//          .call(brushV);
 
-const brushH = d3.brushX()
-                 .extent([[0, 0], [width - 2 * DASHSIZE, DASHSIZE]])
-                 .on('start brush', brushed('X'))
-                 .on('end', brushended);
+// const brushH = d3.brushX()
+//                  .extent([[0, 0], [width - 2 * DASHSIZE, DASHSIZE]])
+//                  .on('start brush', brushed('X'))
+//                  .on('end', brushended);
 
-container.append("g")
-         .attr('transform', `translate(${2 * DASHSIZE}, ${height - DASHSIZE})`)
-         .call(brushH);
+// container.append("g")
+//          .attr('transform', `translate(${2 * DASHSIZE}, ${height - DASHSIZE})`)
+//          .call(brushH);

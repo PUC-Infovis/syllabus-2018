@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Dot Dash Plot</title>
+    <style media='screen'>
+          body {
+              margin: 3em auto;
+              max-width: 720px;
+          }
+
+          #scatterplot {
+              clip-path: url(#clipSP);
+          }
+
+          #vertical-dashed {
+              clip-path: url(#clipV);
+          }
+
+          #horizontal-dashed {
+            clip-path: url(#clipH);
+          }
+
+          circle {
+              fill: none;
+              opacity: 0.6;
+              stroke-width: 2px;
+          }
+
+          .not-selected {
+              stroke: grey;
+              opacity: 0.2;
+          }
+
+    </style>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.js'
+            charset='utf-8'></script>
+    </head>
+    <body>
+      <div id='container'></div>
+      <!-- <script src='script01.js' charset='utf-8'></script> -->
+      <script src='script02.js' charset='utf-8'></script>
+  </body>
+</html>

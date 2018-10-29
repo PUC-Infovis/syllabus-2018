@@ -1,0 +1,67 @@
+
+.d3-component svg {
+  background: #ddd;
+}
+
+.fixed{
+  width: 500px;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 1500px;
+}
+
+circle {
+  fill: black;
+}
+
+line {
+  stroke: #9ECAE1;
+  stroke-width: 4px;
+}
+
+text {
+  fill: black;
+  font-family: Ubuntu, sans-serif;
+  font-weight: bold;
+  text-anchor: middle;
+}
+
+.node_fixed circle {
+  stroke: black;
+}
+
+.idyll-scroll{
+  margin: 0px;
+}
+
+.idyll-scroll-text{
+  padding: 0px;
+}
+
+.idyll-scroll-text .idyll-step {
+  margin: 0px;
+}
+
+.line {
+  fill: none;
+  stroke: #ffab00;
+  stroke-width: 3;
+}
+
+
+#small-multiples {
+  width: 200px;
+  height: 185px;
+}
+.x-axis .domain, .x-axis .tick path,
+.y-axis .domain, .y-axis .tick path {
+  display: none;
+}
+.x-axis {
+  height: 1.5em !important;
+}
+.gridline-x {
+  stroke: white;
+}

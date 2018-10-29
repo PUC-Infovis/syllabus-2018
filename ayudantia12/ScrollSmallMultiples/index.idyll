@@ -1,0 +1,314 @@
+[var name:"state" value:"null" /]
+[var name:"count" value:1 /]
+
+[meta title:"Tutorial Idyll" /]
+
+[Scroller currentState:state]
+[Step state:"Introducción" className:"Step"]
+
+[Header
+  title:"Tutorial Idyll"
+  author:"Hernán Valdivieso" /]
+
+
+En esta ayudantía crearemos una visualización desde 0, explicando los pasos en forma de _Scrollytelling_.  Para esto disponemos de una *csv* llamado "askmefi-category-year.csv" que buscamos visualizar. Para cargar y ver el contenido del CSV, basta con realizar las siguientes dos líneas:
+
+```
+[data name:"dataset" source:"askmefi-category-year.csv" /]
+[Table data:dataset /]
+```
+
+[data name:"dataset" source:"askmefi-category-year.csv" /]
+[Table data:dataset /]
+
+[br/]
+**La tarea que decidiremos realizar es comparar tendencias en el tiempo de las diferentes categorías.**
+
+[/Step]
+[Step state:"Inicializar" className:"Step"]
+
+# Construir 1 gráfico 
+
+Etapa: [Display value:state /]
+
+Creamos un objeto SVG con las características básicas, el tamaño y con el "g" para ingresar los objetos de D3 posteriormente.
+
+```javascript
+const WIDTH = 500;
+const HEIGHT = 400;
+const MARGIN = { TOP: 40, BOTTOM: 40, LEFT: 50, RIGHT: 50 };
+
+const width = WIDTH - MARGIN.RIGHT - MARGIN.LEFT;
+const height = HEIGHT - MARGIN.TOP - MARGIN.BOTTOM;
+
+this.build = () => {
+  const svg = d3.select(node).append("svg");
+  this.container = svg
+    .style("width", WIDTH)
+    .style("height", HEIGHT)
+    .append("g");
+};
+```
+El uso de `this` es para referirse a si mismo, como componente. 
+
+[/Step]
+
+[Step state:"Construir ejes" className:"Step"]
+# Definir escalas
+Etapa: [Display value:state /]
+
+Primero partiremos creando un *line chart simple* para comparar las tendencias. Para eso necesitamos primero definir las escalas y los ejes.
+
+```javascript
+var container = this.container
+  .append("g")
+  .attr("id", "graph")
+  .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
+var xScale = d3
+  .scaleLinear()
+  .domain([2004, 2014])
+  .range([0, width]);
+
+var yScale = d3
+  .scaleLinear()
+  .domain([0, 3500])
+  .range([height, 0]);
+
+var line = d3
+  .line()
+  .x(d => xScale(d.year))
+  .y(d => yScale(d.n));
+
+const axisBottom = d3.axisBottom(xScale).tickPadding(10);
+const axisLeft = d3.axisLeft(yScale).tickPadding(10);
+
+container
+  .append("g")
+  .attr("class", "x axis")
+  .attr("transform", "translate(0," + height + ")")
+  .call(axisBottom);
+
+container
+  .append("g")
+  .attr("class", "y axis")
+  .call(axisLeft);
+```
+[/Step]
+[Step state:"Grafico de línea" className:"Step"]
+
+# Agregar el path al gráfico
+
+
+Etapa: [Display value:state /]
+
+Finalmente agregamos un path. la función `slice` permite tomar una parte de la lista, es igual a realizar `lista[:count]` en Python.
+
+La única diferencia con el paso anterior, es que ahora queremos agregar más de una línea. 
+Para eso aplicaremos un forEach a cada conjunto de datos y para cada uno agregaremos un path.
+
+```javascript
+this.nested_data.slice(0, count).forEach(dataSeries => {
+  container
+    .append("path")
+    .datum(dataSeries.values)
+    .attr("class", "line")
+    .attr("d", line);
+});
+```
+
+Cantidad de líneas: [Range value:count min:1 max:12 /]
+[Display value:count /]
+
+
+
+### ¿Pueden distinguir y compara las diversas líneas?
+
+No :c
+
+### ¿Alguna idea?
+1. Podría poner color a cada línea, pero ¿tendré suficientes colores?
+2. Puedo hacer que el *hover* del *mouse* destaque una de las líneas por sobre la otra. Es una buena idea, pero seguimos sin evitar que a primera vista no de miedo el gráfico. Además, ya manejamos la manipulación e interactividad, tenemos que explorar nuevas soluciones.
+3. **Utilizar un Small Multiple.**
+
+[/Step]
+
+[Step state:"Un gráfico small multiple" className:"Step"]
+# Construir 1 gráfico pequeño
+Etapa: [Display value:state /]
+
+Vamos a utilizar la idea 3 y partiremos con 1 solo gráfico del small multiples. Aquí es necesario tener en cuenta los siguientes hechos:
+
+1. Cada gráfico representará 1 línea.
+2. La posición de los gráficos debe variar en la grilla.
+3. Las escalas y tamaño es menor a lo que disponiamos antes.
+
+```javascript
+var new_width = 80;
+var new_heigh = 80;
+var axes_size = 30;
+
+var container = this.container
+  .append("g")
+  .attr("id", "graph")
+  .attr("transform", `translate(30,30)`);
+
+var xScale = d3
+  .scaleLinear()
+  .domain([2004, 2014])
+  .range([0, new_width]);
+
+var yScale = d3
+  .scaleLinear()
+  .domain([0, 3500])
+  .range([new_heigh, 0]);
+
+var littleSvg = container
+  .append("svg")
+  .style("width", new_width)
+  .style("height", new_heigh)
+  .append("g")
+  .attr("transform", `translate(30, 0)`);
+
+littleSvg
+  .append("path")
+  .datum(dataSeries[0].values)
+  .attr("class", "line")
+  .attr("d", line);
+
+littleSvg
+  .append("g")
+  .attr("class", "x axis")
+  .attr("transform", `translate(0,${new_heigh} )`)
+  .call(axisBottom);
+
+littleSvg
+  .append("g")
+  .attr("class", "y axis")
+  .call(axisLeft);
+```
+[/Step]
+
+[Step state:"Varios gráficos small multiple" className:"Step"]
+# Contruir el small multiple completo
+Etapa: [Display value:state /]
+### ¿Como ubicamos cada gráfico?
+
+Disponemos de una lista, donde cada línea va a representar un gráfico. Por lo tanto necesitamos que de una lista, esto se pase a una matriz. Para ello debemos utilizar las operaciones de múdulo y division parte entera para obtener lo siguiente:
+
+```javascript
+var MAX_ITEM_PER_COLUMN = 3;
+var row = i % MAX_ITEM_PER_COLUMN;
+var column = Math.floor(i / MAX_ITEM_PER_COLUMN);
+```
+
+Con módulo, `row` solo estará entre 0 y 2, mientras que con división parte entera, `column` solo aumentará en 1 cada vez que el indice (`i`) sea igual a un múltiplo de 3. Luego, para cada `row` y `column` posible, hacemos: 
+
+```javascript
+// 30 por el margen que agregamos el cual tapará nuestras letras,
+var translate_x = 30 + (new_width + axes_size) * column;
+var translate_y = (new_heigh + axes_size) * row;
+
+var littleSvg = container
+  .append("svg")
+  .style("width", new_width)
+  .style("height", new_heigh)
+  .append("g")
+  .attr("transform", `translate(${translate_x}, ${translate_y})`);
+
+```
+
+Cantidad de gráficos [Range value:count min:1 max:12 /]
+[Display value:count /]
+
+
+
+ [/Step]
+[Step state:"Small multiple con puntos" className:"Step"]
+
+# Agregar puntos para comparar
+Etapa: [Display value:state /]
+
+En esta etapa, para cada gráfico, agregaremos puntos en la línea del siguiente modo:
+
+```javascript
+circle = littleSvg
+  .selectAll("circle")
+  .data(dataSeries.values)
+  .enter()
+  .append("circle")
+  .attr("cx", d => xScale(new Date(d.year, 0, 1)))
+  .attr("cy", e => yScale(e.n))
+  .attr("r", 2);
+```
+[/Step]
+[Step state:"Small multiple con hover" className:"Step"]
+
+
+# Cambiar los puntos a hover
+
+Mejor, utilicemos el *mouse* para enfatizar los puntos de interes
+
+```javascript
+circle.attr("class", d => "year-" + d.year).attr("opacity", 0);
+
+circle
+  .on("mouseover", d => {
+    d3.selectAll(`.year-${d.year}`).attr("opacity", 1);
+  })
+  .on("mouseout", d => {
+    d3.selectAll(`.year-${d.year}`).attr("opacity", 0);
+  });
+```
+[/Step]
+
+ [Step state:"Small multiple con hover mejorado" className:"Step"]
+# Mejorar hover
+
+Con puntos tan pequeños es dificil tener el *mouse* sobre él. Por lo tanto utilizaremos el método `d3.mouse()` para capturar la posición del *mouse* e identificar el año a partir de la posición.
+
+Etapa: [Display value:state /]
+
+```javascript
+littleSvg
+  .append("rect")
+  .attr("fill", "none")
+  .style("pointer-events", "all")
+  .attr("width", width)
+  .attr("height", height)
+  .on("mouseover", (d, i, nodes) => {
+    var year = xScale.invert(d3.mouse(nodes[i])[0]);
+    var algo = year.getFullYear();
+    d3.selectAll(`.year-${algo}`).attr("opacity", 1);
+  })
+  .on("mouseout", (d, i, nodes) => {
+    d3.selectAll("circle").attr("opacity", 0);
+  })
+  .on("mousemove", (d, i, nodes) => {
+    d3.selectAll("circle").attr("opacity", 0);
+
+    var year = xScale.invert(d3.mouse(nodes[i])[0]);
+    var algo = year.getFullYear();
+    d3.selectAll(`.year-${algo}`).attr("opacity", 1);
+});
+```
+
+[/Step]
+
+[/Scroller]
+
+
+[Fixed]
+      [StepSmallMultiples className:"d3-component" state:state data:dataset count:count /]
+[/Fixed]
+
+# Más información
+Instalación: https://idyll-lang.org/docs/getting-started
+
+Ejemplos: https://idyll-lang.org/gallery
+
+Otros componentes propios de Idyll: https://idyll-lang.org/docs/components
+
+
+
+
+

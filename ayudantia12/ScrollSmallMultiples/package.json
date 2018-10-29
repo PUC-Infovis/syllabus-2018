@@ -1,0 +1,19 @@
+{
+  "name": "Small Multiples",
+  "version": "2.0.0",
+  "license": "MIT",
+  "idyll": {
+    "theme": "github",
+    "layout": "blog",
+    "css": "styles.css"
+  },
+  "dependencies": {
+    "d3": "^5.7.0",
+    "d3fc": "^12.1.0",
+    "idyll": "^3.0.0",
+    "idyll-d3-component": "^2.0.0"
+  },
+  "devDependencies": {
+    "gh-pages": "^0.12.0"
+  }
+}

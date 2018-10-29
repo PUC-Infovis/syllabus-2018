@@ -1,0 +1,56 @@
+[meta title:"Force Graph D3" description:"Parametros de Force Graph D3" /]
+[data name:"dataset" source:"dataset.json" /]
+[Header
+  title:"Force Graph D3"
+  subtitle:"Testear los parámetros en el force graph con ayuda de Idyll"
+  author:"Hernán Valdivieso" /]
+
+# ¿Se acuerdan de este código?
+
+[gist gist:"c7f59221f3d419bcd95a8f05265b2444" file:"force-graph.js" /]
+
+Este código fue compartido gracias a una de las funcionalidades de Idyll llamada [link text:'gist' url: 'https://idyll-lang.org/docs/components/default/gists'/]. Para esto, es necesario [link text:'crear un gist' url: 'https://help.github.com/articles/creating-gists/'/] y luego, ingresar este código: 
+
+```
+[gist gist:"c7f59221f3d419bcd95a8f05265b2444" file:"force-graph.js" /]
+``` 
+
+Con lo anterior, el *gist* es cargado. Adicionalmente, para agregar *links* con Idyll, es necesario seguir el formato indicado en [link text:'su página' url: 'https://idyll-lang.org/docs/components/default/link'/].
+
+# Testeo de parámetros
+En la ayudantía 7 observamos que dicho grafo de fuerza tiene 3 parámetros los cuales afectan a la disposición de los nodos. En esta primera parte podremos experimentar como afectan dichos cambios.
+Para esto, utilizaremos uno de los componentes que tiene Idyll llamado [link text:'range' url: 'https://idyll-lang.org/docs/components/default/range'/] para variar el valor de dichos parámetros y observar sus cambios.
+
+
+## Ajuste de parámetros
+
+### Fuerza de colision
+[var name:"forceCollide" value:20 /]
+
+[Range min:-200 max:200 value:forceCollide /] [Display value:forceCollide /]
+
+### Fuerza de carga
+[var name:"charge" value:-500 /]
+
+[Range min:-500 max:500 value:charge /] [Display value:charge /]
+
+
+### Largo links: 
+[var name:"links" value:80 /]
+
+[Range min:0 max:500 value:links /] [Display value:links /]
+
+# ¿Como mantener la pantalla dividida?
+
+Esta facilidad de tener la pantalla dividida y solo la parte de izquierda pueda hacer *scroll* es gracias a [link text:'fixed' url: 'https://idyll-lang.org/docs/components/default/fixed'/]. De este modo, con ingresar las siguientes 3 líneas, Idyll realiza los cambios pertinentes:
+
+```
+[Fixed]
+      [D3Graph className:"d3-component" data:dataset forceCollide: forceCollide links:links charge:charge /]
+[/Fixed]
+
+```
+
+[Fixed]
+      [D3Graph className:"d3-component" data:dataset forceCollide:forceCollide links:links charge:charge /]
+[/Fixed]

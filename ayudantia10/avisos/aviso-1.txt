@@ -1,0 +1,5 @@
+Estimadas/os,
+
+Mañana nuevamente tendremos ayudantía. Para ayudarlos con el avance de la tarea, decidimos adelantar la introducción a D3 para mañana. En esta, introduciremos lo que es D3, veremos ejemplos de básicos de código y daremos consejos específicos de como tratar con esta librería. Dado que veremos ejemplos de código, es consejable que lleven su computador para que prueben ustedes mismos los ejemplos que les preparamos.
+
+Nos vemos mañana.

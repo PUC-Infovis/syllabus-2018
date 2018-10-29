@@ -1,0 +1,13 @@
+Estimado/as
+
+Tal como se dijo en la ayudantía 6, tendremos un práctico de bonus utilizando D3.js. Este práctico consiste en tomar la ayudantía 6 de force-graph y agregar las siguientes funcionalidades:
+
+1) Cuando se hace drag de los nodos, al momento de terminar el drag, el nodo debe quedar bloqueado en la última posición. Solo cuando se hace doble click al nodo, este será liberado y la simulación lo volverá a estabilizar.
+
+2) Agregar 3 input numéricos y un boton al HTML. Estos input numéricos son para alterar los valores de forceCollide, forceManyBody().strength y distance. Cuando se haga click en el botón, la simulación debe ajustar dichos valores a los ingresados en los input y volver a empezar para cambiar la posición de los nodos según los nuevos parámetros.
+
+Link para crear el repositorio: https://classroom.github.com/a/IxTJ4laC
+
+Tienen hasta el sábado 15 a las 23:59 para entregarlo.
+
+Saludos

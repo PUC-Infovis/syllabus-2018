@@ -1,0 +1,13 @@
+Estimadas/os,
+
+Primero que todo, les comparto la recientemente contruida página del curso. En esta, compartiremos información del curso, el material, enlaces a nuestros repositorios, la planificación del curso actualizada y las notas actualizadas:
+
+https://puc-infovis.github.io/material.html
+
+Además, pero no menos importante, iremos subiendo distintos proyectos del año pasado, en su primera versión, para que les sirvan de ejemplo para los suyos. Estos están siendo reconstruidos, por lo que puede que no funcionen al 100%.
+
+Aprovecho de mencionar, que están actualizados los puntajes del tercer práctico en la planilla de notas previamente compartida (y ahora en la página del curso). El buzón de siding de recorrección estará abierto hasta este domingo.
+
+Finalmente, recuerden que mañana hay ayudantía, como cada miércoles. En ella comenzaremos a agregar animaciones e interacción básica a nuestras visualizaciones estáticas.
+
+Saludos.

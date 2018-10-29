@@ -1,0 +1,16 @@
+Estimadas/os,
+
+Debido a que aún faltan un par de grupos para inscribirse, les extenderemos el plazo de inscripción hasta mañana. Luego de esto, aquellos estudiantes no inscritos serán agrupados al azar por el equipo docente. Esto incluye a aquellas parejas publicadas en busca de un tercer integrante.
+
+Recuerden, deben anotarse en este issue con su nombre de grupo:
+
+https://github.com/PUC-Infovis/syllabus-2018/issues/6
+
+Además, ante algunas dudas que surgieron, queremos recordarles que la idea de la experiencia de la tarea 1 es conocer la elaboración imperativa y declarativa de visualiaciones. El gráfico en Python debe realizarse de forma imperativa, es decir, con manejo manual de SVG. Y el de D3 siguiendo su estandar declarativo.
+
+Si alguna de estas experiencias se realizan de forma contraria, como usar estilo declarativo para la parte imperativa, o vice versa, esto será sancionado y solo se le otorgará a lo más un quinto del puntaje respectivo.
+
+No duden en postear este tipo de dudas en el foro de syllabus-2018.
+
+Saludos.	 
+ 

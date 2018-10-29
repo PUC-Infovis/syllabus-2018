@@ -1,0 +1,6 @@
+Estiamadas/os,
+
+Hoy no habrá ayudantía presencial. En su lugar, se subirá durante la tarde una demo de ejemplo para que revisen sobre D3 con datos espaciales.
+
+
+Saludos.	

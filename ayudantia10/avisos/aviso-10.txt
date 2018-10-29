@@ -1,0 +1,12 @@
+Estimadas/os,
+
+Como se mencionó hoy en clases, a favor de nivelar los conocimientos de tecnologías del curso, esta semana se realizarán dos ayudantías.
+
+Mañana miércoles será la primera en horario y sala de ayudantía (W:5, sala A6). Esta tratará sobre las bases de la web y veremos los principios de HTML, CSS y SVG.
+
+El jueves será la segunda y será una introducción a JavaScript. Se realizará en horario y sala de cátedra (J:2, sala BC25).
+
+Quiero recordar que estas ayudantías están pensadas para aquellos alumnos que no estén familiarizados a estos lenguajes. No asistir no tendrá ninguna conseciencia negativa, y el material será subido para que lo puedan revisar. Pero si no han tenido ningún acercamiento a las tecnologías mencionadas, les recomiendo fuertemente asistir.
+
+Nos vemos mañana.
+Saludos.

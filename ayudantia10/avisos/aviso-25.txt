@@ -1,0 +1,11 @@
+Estimadas/os
+
+Mañana nuevamente hay ayudantía. En esta continuaremos con nuestra introducción a D3, con ejercicios prácticos que pueden ser de ayuda para la tarea 1.
+
+Quiero recordarles que deben inscribir pronto sus grupos de proyecto. Esto incluye elegir un nombre de grupo que deben especificar en este issue:
+
+https://github.com/PUC-Infovis/syllabus-2018/issues/6
+
+Tienen plazo hasta el viernes para hacer esto.
+
+Nos vemos mañana.

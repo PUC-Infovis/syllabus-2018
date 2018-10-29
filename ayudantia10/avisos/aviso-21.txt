@@ -1,0 +1,15 @@
+Estimadas/os,
+
+Se ha subido una actualización del enunciado de la Tarea 1. Hay dos cambios principales:
+
+- En la subsección de problemas en los datos, se hace énfasis en que deben justificar su decisión tomada al lidiar con dichos problemas. También se menciona que las notas "P" no es son el único problema sobre las datos, si no que pueden existir alumnos a quienes les faltan notas.
+
+
+- En la sección de visualización imperativa, se hace énfasis sobre que su código debe generar manualmente la imagen SVG que se pide, y no debe relevarse dicha responsabilidad a una librería externa como matplotlib.
+
+
+Les recuerdo que utilizaremos la sección de issues del repositorio de ayudantías como medio oficial para publicar y responder dudas. Ya hay un par de dudas publicadas relacionadas a la tarea:
+
+https://github.com/PUC-Infovis/syllabus-2018/issues
+
+Saludos y feliz feriado.

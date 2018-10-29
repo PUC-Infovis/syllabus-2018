@@ -1,29 +1,53 @@
-<!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <title>
-        Canvas tutorial
-    </title>
-    <style media='screen'>
-          body {
-              margin: 3em auto;
-              max-width: 800px;
-              font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-          }
 
-          #text-input {
-              margin: 1em;
-          }
+<head>
+    <meta charset="utf-8">
+
+    <title>Word Cloud</title>
+
+    <style media='screen'>
+        body {
+            margin: 3em auto;
+            max-width: 720px;
+        }
+
+        h1 {
+            background-color: bisque;
+            text-align: center;
+            border-radius: 20px;
+
+        }
+
+        h4 {
+            text-align: center
+        }
+
+        .cloud {
+            background-color: blanchedalmond;
+            margin: 20px;
+            padding: 10px;
+            border-radius: 20px;
+
+        }
     </style>
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.js'
-            charset='utf-8'></script>
-    </head>
-    <body>
-        <h1>Demo Canvas</h1>
-        <input type="text" id="text-input" value="5000">
-        <div id='container'></div>
-        <!-- <script src='scriptCanvas01.js' charset='utf-8'></script> -->
-        <script src='scriptCanvas02.js' charset='utf-8'></script>
-  </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/5.7.0/d3.js' charset='utf-8'></script>
+    <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+    <script src='script.js' charset='utf-8'></script>
+</head>
+
+<body>
+    <h1>Word Cloud</h1>
+    <h4>Avisos de siding</h4>
+    <div class="cloud">
+        <h3>Versión sin procesar</h3>
+        <div id="chart"></div>
+    </div>
+    <div class="cloud">
+        <h3>Versión con solo palabras con 4 o más caracteres</h3>
+        <div id="chart_2"></div>
+    </div>
+</body>
+
 </html>

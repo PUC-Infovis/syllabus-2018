@@ -1,0 +1,19 @@
+Estimadas/os,
+
+Se ha publicado el enunciado de la primera entrega del proyecto del curso. Este tiene fecha de entrega, el domingo 23 de septiembre.
+
+Lo más próximo es la formación de grupos de trabajo, que debe ser antes del próximo viernes 31 de agosto. Este debe ser en grupos de exactamente 3 personas y deben anotarlas en la siguiente issue del syllabus:
+
+https://github.com/PUC-Infovis/syllabus-2018/issues/6
+
+Además de especificar los integrantes de grupo, deben decidir un nombre de grupo para reconocerlos y con el cual crearán su repositorio de grupo. Aquellos que ya enviaron sus grupos, les pido el favor de editar sus respuestas e incluir un nombre de grupo.
+
+Una vez que tengan su grupo formado y nombre decidido, con el siguiente enlace pueden crear su grupo y unirse al repositorio creado para su grupo:
+
+https://classroom.github.com/g/rraznC0s
+
+Cualquier duda sobre el proyecto, no duden en postearla en las issues del syllabus.
+
+
+Saludos y éxito.
+FF

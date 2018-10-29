@@ -1,0 +1,11 @@
+Estimadas/os,
+
+Subí la presentación de hoy al repositorio oficial donde dejaremos el material de ayudantías:
+
+https://github.com/PUC-Infovis/syllabus-2018
+
+En la carpeta ayudantia01 pueden encontrar los ejemplos que modificamos juntos también. Recuerden que se incluyen enlaces en la presentación a referencias de HTML, CSS y SVG.
+
+Si tienen dudas de la ayudantía, el material o sobre más material para aprender, no duden en enviarme un correo.
+
+Saludos.

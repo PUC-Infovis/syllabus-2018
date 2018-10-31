@@ -24,25 +24,25 @@ class StepSmallMultiples extends D3Component {
 
     this.bigLineChart = count => {
       // Método que construye el gráfico de línea normal
-      var container = this.container
+      let container = this.container
         .append("g")
         .attr("id", "graph")
         .attr("transform", `translate(${MARGIN.LEFT}, ${MARGIN.TOP})`);
 
       // Definimos la escala del eje X  
-      var xScale = d3
+      let xScale = d3
         .scaleLinear()
         .domain([2004, 2014])
         .range([0, width]);
 
       // Definimos la escala del eje Y  
-      var yScale = d3
+      let yScale = d3
         .scaleLinear()
         .domain([0, 3500])
         .range([height, 0]);
 
       // Definimos la función a cargo de realizar las líneas
-      var line = d3
+      let line = d3
         .line()
         .x(d => xScale(d.year))
         .y(d => yScale(d.n));
@@ -74,21 +74,21 @@ class StepSmallMultiples extends D3Component {
     };
 
     this.smallMultiple = (count, hover) => {
-      var new_width = 80;
-      var new_heigh = 80;
-      var axes_size = 30;
+      let new_width = 80;
+      let new_heigh = 80;
+      let axes_size = 30;
 
-      var container = this.container
+      let container = this.container
         .append("g")
         .attr("id", "graph")
         .attr("transform", `translate(30,30)`);
 
-      var xScale = d3
+      let xScale = d3
         .scaleTime()
         .domain([new Date(2004, 0, 1), new Date(2014, 0, 1)])
         .range([0, new_width]);
 
-      var yScale = d3
+      let yScale = d3
         .scaleLinear()
         .domain([0, 3500])
         .range([new_heigh, 0]);
@@ -103,22 +103,22 @@ class StepSmallMultiples extends D3Component {
         .tickPadding(10)
         .ticks(4);
 
-      var line = d3
+      let line = d3
         .line()
         .x(d => xScale(new Date(d.year, 0, 1)))
         .y(d => yScale(d.n));
 
-      var MAX_ITEM_PER_COLUMN = 3;
+      let MAX_ITEM_PER_COLUMN = 3;
 
       this.nested_data.slice(0, count).forEach((dataSeries, i) => {
-        var row = i % MAX_ITEM_PER_COLUMN;
-        var column = Math.floor(i / MAX_ITEM_PER_COLUMN);
+        let row = i % MAX_ITEM_PER_COLUMN;
+        let column = Math.floor(i / MAX_ITEM_PER_COLUMN);
 
         // 30 por el margen que agregamos el cual tapará nuestras letras,
-        var translate_x = 30 + (new_width + axes_size) * column;
-        var translate_y = (new_heigh + axes_size) * row;
+        let translate_x = 30 + (new_width + axes_size) * column;
+        let translate_y = (new_heigh + axes_size) * row;
 
-        var littleSvg = container
+        let littleSvg = container
           .append("svg")
           .style("width", new_width)
           .style("height", new_heigh)
@@ -143,7 +143,7 @@ class StepSmallMultiples extends D3Component {
           .attr("d", line);
 
         if (hover != undefined) {
-          var circle = littleSvg
+          let circle = littleSvg
             .selectAll("circle")
             .data(dataSeries.values)
             .enter()
@@ -172,7 +172,7 @@ class StepSmallMultiples extends D3Component {
               .attr("width", width)
               .attr("height", height)
               .on("mouseover", (_, i, nodes) => {
-                var year = xScale.invert(d3.mouse(nodes[i])[0]).getFullYear();
+                let year = xScale.invert(d3.mouse(nodes[i])[0]).getFullYear();
                 d3.selectAll(`.year-${year}`).attr("opacity", 1);
               })
               .on("mouseout", () => {
@@ -180,7 +180,7 @@ class StepSmallMultiples extends D3Component {
               })
               .on("mousemove", (_, i, nodes) => {
                 d3.selectAll("circle").attr("opacity", 0);
-                var year = xScale.invert(d3.mouse(nodes[i])[0]).getFullYear();
+                let year = xScale.invert(d3.mouse(nodes[i])[0]).getFullYear();
                 d3.selectAll(`.year-${year}`).attr("opacity", 1);
               });
           }
@@ -205,7 +205,7 @@ class StepSmallMultiples extends D3Component {
     if (oldProps.state == "null" && props.state != "Introducción") {
       this.build();
     }
-    var state = props.state;
+    let state = props.state;
     if (state == "Inicializar") {
       d3.selectAll("svg").remove();
       this.build();
